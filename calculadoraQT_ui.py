@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'calculadoraQT.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.1
+## Created by: Qt User Interface Compiler version 6.5.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -292,7 +292,7 @@ class Ui_MainWindow(object):
         self.button2.setText(QCoreApplication.translate("MainWindow", u"2", None))
         self.button1.setText(QCoreApplication.translate("MainWindow", u"1", None))
         self.button3.setText(QCoreApplication.translate("MainWindow", u"3", None))
-        self.buttonVirgula.setText(QCoreApplication.translate("MainWindow", u",", None))
+        self.buttonVirgula.setText(QCoreApplication.translate("MainWindow", u".", None))
         self.button0.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.buttonMaiseMenos.setText(QCoreApplication.translate("MainWindow", u"+/-", None))
         self.buttonDiv.setText(QCoreApplication.translate("MainWindow", u"/", None))

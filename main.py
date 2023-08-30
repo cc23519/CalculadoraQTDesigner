@@ -69,9 +69,9 @@ class Calculadora(QMainWindow):
             self.ui.visor.setText("Não permitido")
             return
     
-        valor = int(texto)
-        resultado = valor**2
-        self.ui.visor.setText(resultado)
+        valor = texto+"**2"
+        resultado = eval(valor)
+        self.ui.visor.setText(str(resultado))
 
     def Dividido1(self):
         texto = self.ui.visor.text()
@@ -84,8 +84,8 @@ class Calculadora(QMainWindow):
             return
         
         valor = int(texto)
-        resultado = valor/1
-        self.ui.visor.setText(resultado)
+        resultado = 1/valor
+        self.ui.visor.setText(str(resultado))
 
 
     def Limparvisor(self):
