@@ -5,14 +5,15 @@
 import sys
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
+    QSize, QTime, QUrl, Qt, )
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLineEdit,
-    QMainWindow, QPushButton, QSizePolicy, QVBoxLayout,
+    QMainWindow, QPushButton, QSizePolicy, QVBoxLayout, QMessageBox,
     QWidget)
+import re
 from calculadoraQT_ui import Ui_MainWindow
 
 #Classe Tela Calculadora
@@ -24,16 +25,16 @@ class Calculadora(QMainWindow):
         self.ui.setupUi(self)
         
 
-        #Botões - 20 BOTÕES (Contém 18 ainda)
+        
 class Calculadora(QMainWindow):
     def __init__(self):
         super(Calculadora, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
-        # Conectar os botões aos métodos corretamente
+        #Botões - 20 BOTÕES
         self.ui.buttonMaiseMenos.clicked.connect(lambda: self.MostrarNumerosVisor("-"))
-        self.ui.buttonVirgula.clicked.connect(lambda: self.MostrarNumerosVisor(","))
+        self.ui.buttonVirgula.clicked.connect(lambda: self.MostrarNumerosVisor("."))
         self.ui.button1.clicked.connect(lambda: self.MostrarNumerosVisor("1"))
         self.ui.button2.clicked.connect(lambda: self.MostrarNumerosVisor("2"))
         self.ui.button3.clicked.connect(lambda: self.MostrarNumerosVisor("3"))
@@ -50,11 +51,42 @@ class Calculadora(QMainWindow):
         self.ui.buttonMulti.clicked.connect(lambda: self.MostrarNumerosVisor("*"))
         self.ui.buttonIgual.clicked.connect(self.RealizarConta)
         self.ui.buttonCE.clicked.connect(self.Limparvisor)
+        self.ui.buttonX2.clicked.connect(self.Elevado2)
+        self.ui.buttonDiv1.clicked.connect(self.Dividido1)
 
     def MostrarNumerosVisor(self, valor):
         texto = self.ui.visor.text()
         novo_carac = texto + valor
         self.ui.visor.setText(novo_carac)
+
+    def Elevado2(self):
+        texto = self.ui.visor.text()
+
+        if not texto:
+            self.ui.visor.setText("Vazio")
+            return
+        if not re.match(r'^[-+]?[0-9]*\.?[0-9]*$', texto):
+            self.ui.visor.setText("Não permitido")
+            return
+    
+        valor = texto+"**2"
+        resultado = eval(valor)
+        self.ui.visor.setText(str(resultado))
+
+    def Dividido1(self):
+        texto = self.ui.visor.text()
+
+        if not texto:
+            self.ui.visor.setText("Vazio")
+            return
+        if not re.match(r'^[-+]?[0-9]*\.?[0-9]*$', texto):
+            self.ui.visor.setText("Não permitido")
+            return
+        
+        valor = int(texto)
+        resultado = 1/valor
+        self.ui.visor.setText(str(resultado))
+
 
     def Limparvisor(self):
         self.ui.visor.clear()
@@ -72,4 +104,3 @@ if __name__ == '__main__':
     window = Calculadora()
     window.show()
     sys.exit(app.exec())
-        #lembrete: adicionar os botões de x/1, x2.
